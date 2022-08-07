@@ -1,20 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Provider as PaperProvider,DefaultTheme } from 'react-native-paper';
+import LoginContainer from './Containers/Login/LoginContainer';
+import Login2Container from './Containers/Login/Login2Container';
+import Login3Container from './Containers/Login/Login3Container';
+import Login4Container from './Containers/Login/Login4Container';
+import HomeShopContainer from './Containers/Home/HomeShopContainer';
+import BottomNavigator from './Containers/Navigator/BottomNavigator';
 
-export default function App() {
+
+const Stack = createNativeStackNavigator();
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: 'white',
+  },
+};
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <PaperProvider theme={theme}>
+    <NavigationContainer>
+      <Stack.Navigator
+      >
+        <Stack.Screen options={{ headerShown:false }} name="login" component={LoginContainer} />
+        <Stack.Screen options={{ headerShown:false }} name="login2" component={Login2Container} />
+        <Stack.Screen options={{ headerShown:false }} name="login3" component={Login3Container} />
+        <Stack.Screen options={{ headerShown:false }} name="login4" component={Login4Container} />
+        <Stack.Screen options={{ headerShown:false }} name="home" component={BottomNavigator} />
+      </Stack.Navigator>
+    </NavigationContainer>
+
+    </PaperProvider>
+    
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
